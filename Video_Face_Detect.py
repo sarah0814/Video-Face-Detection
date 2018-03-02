@@ -1,9 +1,6 @@
 
 # coding: utf-8
 
-# In[14]:
-
-
 import cv2
 import numpy as np
 import requests
@@ -13,8 +10,8 @@ import matplotlib.pyplot as plt
 import time
 
 http_url='https://api-cn.faceplusplus.com/facepp/v3/detect'
-key = "Dc9H5NAqeNDg4Pa_cdBu8c8fktEfm0FP"    
-secret = "Ol7IuZhGpBKjLeseK344CyvZs1jo_tvl"
+key = "xxx"    # put your key here
+secret = "xxx" # put your secret here
 attr = "gender,age,smiling,emotion,ethnicity,beauty"
 data = {
         'api_key': key,
@@ -22,6 +19,7 @@ data = {
         'return_attributes': attr
 }
 
+# sent the image to Face++ sever and get the result
 def face(image_path):
     for i in range(20):
         try:
@@ -39,6 +37,7 @@ def face(image_path):
         if i==19:
             print(None)
 
+# tag each face with the attributes you are interested in
 def showface(result, image_path, image_labeled_path):
     img = Image.open(image_path)
     draw = ImageDraw.Draw(img)
@@ -71,6 +70,7 @@ def showface(result, image_path, image_labeled_path):
 
         img.save(image_labeled_path)
 
+# input an original video, then it will ouput a labeled video by Face++ Face Detect API
 def videoFaceDetect(in_video_path, out_video_path, image_path, image_labeled_path):
     cap = cv2.VideoCapture(in_video_path)
     
@@ -97,14 +97,10 @@ def videoFaceDetect(in_video_path, out_video_path, image_path, image_labeled_pat
             vidout.write(img_labeled)
     vidout.release()
 
-
-# In[ ]:
-
-
+# now run the target video
 videoFaceDetect('./HappyBirthday_2K.mp4', '/var/Sarah/HappyBirthday_labeled.mp4', './Temp/temp_image.jpg', './Temp/temp_labeled_image.jpg')
 
 
-# In[ ]:
 
 
 
